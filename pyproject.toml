@@ -24,7 +24,11 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 79
-exclude = []
+exclude = [
+    "restaurants/migrations/*",
+    "users/migrations/*",
+    "votes/migrations/*",
+]
 
 [tool.ruff.lint]
 select = [
@@ -35,7 +39,7 @@ select = [
     "N",  # PEP8 naming convetions
 ]
 
-ignore = []
+ignore = ["I001", "E731"]
 
 [tool.ruff.lint.flake8-quotes]
 inline-quotes = "double"

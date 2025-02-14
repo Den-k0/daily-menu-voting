@@ -6,8 +6,12 @@ from django.contrib.auth import get_user_model
 from restaurants.models import Restaurant
 
 CREATE_RESTAURANT_URL = reverse("restaurants:restaurant-list")
-UPDATE_RESTAURANT_URL = lambda pk: reverse("restaurants:restaurant-detail", kwargs={"pk": pk})
-DELETE_RESTAURANT_URL = lambda pk: reverse("restaurants:restaurant-detail", kwargs={"pk": pk})
+UPDATE_RESTAURANT_URL = lambda pk: reverse(
+    "restaurants:restaurant-detail", kwargs={"pk": pk}
+)
+DELETE_RESTAURANT_URL = lambda pk: reverse(
+    "restaurants:restaurant-detail", kwargs={"pk": pk}
+)
 
 
 def create_user(**params):
@@ -31,7 +35,7 @@ class RestaurantAPITests(TestCase):
         res = self.client.post(reverse("users:token_obtain_pair"), payload)
         self.token = res.data["access"]
 
-        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.token}")
 
         self.restaurant = Restaurant.objects.create(
             name="Test Restaurant",
@@ -81,4 +85,6 @@ class RestaurantAPITests(TestCase):
         res = self.client.delete(url)
 
         self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(Restaurant.objects.filter(id=self.restaurant.id).exists())
+        self.assertFalse(
+            Restaurant.objects.filter(id=self.restaurant.id).exists()
+        )

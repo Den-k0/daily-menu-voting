@@ -5,18 +5,29 @@ from users.models import Employee
 from restaurants.models import Restaurant, Menu
 from votes.models import Vote
 
+
 class VoteAPITests(APITestCase):
     def setUp(self):
         self.client = APIClient()
 
         # Create users
-        self.user = Employee.objects.create_user(email="testuser@example.com", password="testpass123")
-        self.superuser = Employee.objects.create_superuser(email="superuser@example.com", password="superpass123")
+        self.user = Employee.objects.create_user(
+            email="testuser@example.com", password="testpass123"
+        )
+        self.superuser = Employee.objects.create_superuser(
+            email="superuser@example.com", password="superpass123"
+        )
 
         self.restaurant = Restaurant.objects.create(name="Test Restaurant")
-        self.menu = Menu.objects.create(restaurant=self.restaurant, date="2025-02-14", items="Dish 1, Dish 2")
+        self.menu = Menu.objects.create(
+            restaurant=self.restaurant,
+            date="2025-02-14",
+            items="Dish 1, Dish 2",
+        )
 
-        self.employee = Employee.objects.create(email="employee@example.com", password="employeepass123")
+        self.employee = Employee.objects.create(
+            email="employee@example.com", password="employeepass123"
+        )
 
         payload = {"email": "testuser@example.com", "password": "testpass123"}
         res = self.client.post(reverse("users:token_obtain_pair"), payload)
@@ -30,7 +41,11 @@ class VoteAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_create_vote_wrong_menu_date(self):
-        wrong_menu = Menu.objects.create(restaurant=self.restaurant, date="2025-02-13", items="Dish 3, Dish 4")
+        wrong_menu = Menu.objects.create(
+            restaurant=self.restaurant,
+            date="2025-02-13",
+            items="Dish 3, Dish 4",
+        )
         url = reverse("votes:vote-list")
         payload = {"menu": wrong_menu.id}
         response = self.client.post(url, payload)

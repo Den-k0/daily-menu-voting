@@ -10,7 +10,9 @@ class Restaurant(models.Model):
 
 
 class Menu(models.Model):
-    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name="menus")
+    restaurant = models.ForeignKey(
+        Restaurant, on_delete=models.CASCADE, related_name="menus"
+    )
     date = models.DateField(default=timezone.now, unique=True)
     items = models.TextField(null=False, blank=False)
 

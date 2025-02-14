@@ -10,7 +10,9 @@ class RestaurantSerializer(serializers.ModelSerializer):
 
 
 class MenuSerializer(serializers.ModelSerializer):
-    restaurant = serializers.PrimaryKeyRelatedField(queryset=Restaurant.objects.all())
+    restaurant = serializers.PrimaryKeyRelatedField(
+        queryset=Restaurant.objects.all()
+    )
     date = serializers.DateField()
 
     class Meta:

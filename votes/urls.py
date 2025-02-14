@@ -6,7 +6,7 @@ from votes.views import (
 )
 
 router = DefaultRouter()
-router.register('votes', VoteViewSet)
+router.register("votes", VoteViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),

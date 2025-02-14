@@ -21,12 +21,20 @@ class VoteViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         menu_id = request.data.get("menu")
-        if Vote.objects.filter(employee=request.user, menu_id=menu_id).exists():
-            return Response({"detail": "You have already voted for this menu."}, status=status.HTTP_400_BAD_REQUEST)
+        if Vote.objects.filter(
+            employee=request.user, menu_id=menu_id
+        ).exists():
+            return Response(
+                {"detail": "You have already voted for this menu."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
         return super().create(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         if not request.user.is_staff:
-            return Response({"detail": "You do not have permission to delete votes."}, status=status.HTTP_403_FORBIDDEN)
+            return Response(
+                {"detail": "You do not have permission to delete votes."},
+                status=status.HTTP_403_FORBIDDEN,
+            )
         return super().destroy(request, *args, **kwargs)
