@@ -159,11 +159,3 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(days=7),
     "ROTATE_REFRESH_TOKENS": False,
 }
-
-
-# In the Data Sources and Drivers dialog, fill in the connection details:
-# Host: localhost
-# Port: 5434
-# Database: dmv
-# User: dmv
-# Password: dmv
