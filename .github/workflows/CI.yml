@@ -48,4 +48,8 @@ jobs:
         - name: Run tests
           run: poetry run python manage.py test
           env:
-            SECRET_KEY: ${{ secrets.SECRET_KEY }}
+            POSTGRES_DB: test
+            POSTGRES_USER: test
+            POSTGRES_PASSWORD: test
+            POSTGRES_HOST: test
+            POSTGRES_PORT: 5432
